@@ -64,9 +64,9 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">ALARM</span> is a cross-system anomaly detection method for microservice systems using multi-modal transfer learning, outperforms state-of-the-art methods on an open-source benchmark and a real-world industrial microservice system.
+        <span class="dnerf">ALARM</span> is a novel cross-system anomaly detection method for microservice systems that leverages multimodal transfer learning to effectively detect anomalies without requiring labeled data from the target system. By utilizing existing labeled multimodal data from other systems, ALARM achieves superior performance, outperforming state-of-the-art methods with a 16.38% improvement in F1 score on both an open-source benchmark and a real-world industrial microservice system.
       </h2>
-      <img src="static/image/overview.png" alt="BUFFET teaser.">
+      <img src="static/image/overview.png" alt="ALARM overview" style="width: 100%;">
     </div>
   </div>
 </section>
@@ -78,19 +78,27 @@
         <h2 class="title is-3">Summary</h2>
         <div class="content has-text-justified">
           <p>
-            <b>Scenario: Proactive Anomaly Detection in Microservices Using Multimodal Data</b><br>
-            Microservice architectures have emerged as a dominant paradigm for constructing scalable and agile systems, where numerous independently deployable services collaborate to handle user requests. However, the intricate interactions between microservices and the rapid evolution of their technical stacks introduce significant challenges in maintaining system reliability. Proactive anomaly detection in such environments is critical yet daunting, as anomalies can manifest across heterogeneous multimodal data streams—including traces, logs, and metrics—each capturing distinct aspects of system behavior (e.g., invocation topologies, operational events, and performance indicators).
+            <b>Background: The Challenge of Anomaly Detection in Microservice Systems</b><br>
+            Microservice architecture has become the de-facto paradigm for constructing large software systems due to its tremendous advantages in agility and scalability. In a microservice system, numerous microservices work together to handle user requests, with each microservice being independently developed, tested, deployed, and upgraded. However, the rapid changes of each microservice and the increasing intricacy of microservices interactions tend to incur faults that cause errors and lead to system failures if anomalies are not accurately detected and corresponding measures are not taken. Therefore, accurate anomaly detection is crucial for guaranteeing the reliability of microservice systems.
          </p>
          <p>
-            <b>Challenges: Up-to-date labels unavailable</b><br>
-            This challenge arises from two factors. First, <b>frequent changes in microservice systems</b> render old label data obsolete and unusable. Second, <b>the increasing intricacy of microservices interactions</b> makes it extremely difficult to obtain accurate human labels, requiring substantial labeling costs.
+            <b>The Problem: Two Fundamental Challenges</b><br>
+            Existing anomaly detection methods face two intrinsic challenges in microservice systems. <b>First, heterogeneous technical stacks and intricate dependencies</b> between microservices make a single type of runtime data (logs, metrics, or traces) incapable of revealing all types of anomalies. This necessitates the comprehensive utilization of multimodal data. <b>Second, frequent updates and highly dynamic dependencies</b> make it impractical to obtain up-to-date and sufficient labeled data to build anomaly detection models. The rapid evolution of microservices renders old label data obsolete, while the complexity of interactions makes accurate human labeling extremely costly and time-consuming.
          </p>
          <p>
-            <b>Our propose method: <b><span style="color: red">ALARM</span></b></b><br>
-            We therefore propose ALARM, a novel anomaly detection method that <b>leverages existing labeled multimodal data from other systems to build effective anomaly detection models for the target microservice system</b>.
-            To mitigate the obstacles posed by complex relationships and inconsistency in data quality,
-            on the one hand, ALARM introduces a <span style="color: red"><b> user call-based graph fusion method </b></span>  to effectively model inter-modal and inter-microservices relationships.
-            On the other hand, ALARM employs <span style="color: red"><b> contrastive learning </b></span> combined with <span style="color: red"><b> virtual sample generation </b></span> techniques to balance the two learning processes, increasing diversity from both aspects and thereby alleviating overfitting in modalities and domains.
+            <b>Our Solution: ALARM - Cross-system Anomaly Detection with Multimodal Transfer Learning</b><br>
+            We introduce ALARM, a novel anomaly detection method that addresses both challenges simultaneously by <b>leveraging existing labeled multimodal data from other systems to build effective anomaly detection models for the target microservice system</b>. This approach, which we refer to as Cross-system Anomaly Detection using Multimodal data (CADM), eliminates the need for additional labeled data from the target system while fully utilizing multimodal runtime data.
+         </p>
+         <p>
+            <b>Key Technical Innovations:</b><br>
+            To overcome the obstacles posed by complex relationships and inconsistency in data quality across modalities and domains, ALARM employs two key techniques:
+            <ul>
+              <li><span style="color: red"><b>User Call-based Graph Fusion Method:</b></span> This approach effectively models inter-modal and inter-microservices relationships by organizing multimodal data generated under the same user call into unified graph embeddings, preserving service invocation topologies and operational context.</li>
+              <li><span style="color: red"><b>Contrastive Learning with Virtual Sample Generation:</b></span> This technique balances cross-modal and cross-domain learning processes, increasing diversity from both aspects and thereby alleviating overfitting in modalities and domains.</li>
+            </ul>
+         </p>
+         <p>
+            <b>Results:</b> Experiments on an open-source benchmark microservice system and a real-world industrial microservice system demonstrate the effectiveness of ALARM. Without requiring additional labeled data from the target system, ALARM outperforms existing unsupervised methods and cross-system anomaly detection models, achieving a <b>16.38% improvement in F1 score</b>.
          </p>
         </div>
       </div>
@@ -108,16 +116,13 @@
          <div class="content has-text-justified">
           <ul>
             <li>
-               We propose a novel anomaly detection method, ALARM, for microservice systems. ALARM is tailored for the CADM task
-            that tackle the challenges of heterogeneous modality data and scarce labels in a holistic way.
+               <b>Novel Task Formulation:</b> We introduce the Cross-system Anomaly Detection using Multimodal data (CADM) task, which addresses the challenges of heterogeneous modality data and scarce labels in microservice systems in a holistic way. This task formulation enables building effective anomaly detection models for target systems without requiring labeled data from those systems.
             </li>
             <li>
-               ALARM introduces a user call-based graph fusion approach to model complex inter-modal and inter-microservices
-            relationships, improving transferable knowledge extraction. Contrastive learning is used to balance cross-modal and
-            cross-domain learning, while virtual sample generation enhances diversity, addressing modal and domain overfitting.
+               <b>Innovative Method Design:</b> We propose ALARM, a novel anomaly detection method specifically tailored for the CADM task. ALARM introduces a user call-based graph fusion approach to model complex inter-modal and inter-microservices relationships, effectively extracting transferable knowledge from multimodal runtime data. The method employs contrastive learning to balance cross-modal and cross-domain learning processes, while virtual sample generation enhances diversity, addressing modal and domain overfitting issues.
             </li>
             <li>
-               Cross-system experiments on two microservice systems demonstrated the effectiveness of the ALARM approach.
+               <b>Comprehensive Evaluation:</b> We conduct extensive cross-system experiments on both an open-source benchmark microservice system and a real-world industrial microservice system. The results demonstrate that ALARM significantly outperforms existing unsupervised methods and cross-system anomaly detection models, achieving a 16.38% improvement in F1 score without requiring any additional labeled data from the target system.
             </li>
          </ul>
          </div>
@@ -132,14 +137,20 @@
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-      <h2 class="title is-3">Multi-modal data in microservices</h2>
+      <h2 class="title is-3">Multimodal Data in Microservices</h2>
          <div class="content has-text-justified">
-   Site Reliability Engineers (SREs) monitor microservices systems by relying on three key types of runtime data—traces, logs, and metrics. Traces reveal service invocation topologies as tree-like call graphs with unique trace IDs and span IDs, documenting response times and status codes to enhance system transparency; logs are semi-structured textual outputs containing timestamps, log levels, and operational event details for inferring system state transitions; metrics serve as performance indicators (e.g., CPU utilization, memory consumption) collected at intervals into multi-dimensional time series, reflecting temporal fluctuations in system performance. Each modality embodies distinct structural characteristics and encapsulates spatial, temporal, and semantic information, and SREs integrate them to comprehensively assess the operational health and performance of microservices systems.
+   <p>Site Reliability Engineers (SREs) monitor microservice systems by relying on three key types of runtime data—traces, logs, and metrics. Each modality captures distinct aspects of system behavior and embodies unique structural characteristics:</p>
+   <ul>
+     <li><b>Traces:</b> Reveal service invocation topologies as tree-like call graphs with unique trace IDs and span IDs. They document response times and status codes, providing spatial information about service dependencies and invocation paths, thereby enhancing system transparency and enabling the understanding of request flows across microservices.</li>
+     <li><b>Logs:</b> Semi-structured textual outputs containing timestamps, log levels, and operational event details. They capture temporal sequences of events and semantic information about system state transitions, allowing SREs to infer what happened and when during system execution.</li>
+     <li><b>Metrics:</b> Performance indicators (e.g., CPU utilization, memory consumption, request rates) collected at regular intervals into multi-dimensional time series. They reflect temporal fluctuations in system performance and resource utilization, providing quantitative measures of system health.</li>
+   </ul>
+   <p>Each modality encapsulates complementary information—spatial (traces), temporal (metrics and logs), and semantic (logs)—that together provide a comprehensive view of system behavior. SREs integrate these multimodal data sources to assess the operational health and performance of microservice systems, as anomalies may manifest differently across modalities.</p>
          </div>
         <div align="center">
-       <img src= "/static/image/multimodal.png" alt="Hierarchical UCB" style="width: 60%;">
+       <img src= "/static/image/multimodal.png" alt="Multimodal data in microservices" style="width: 80%;">
        <p><em>
-         Multi-modal data in microservices
+         Illustration of multimodal runtime data in microservice systems: traces (service invocation topologies), logs (operational events), and metrics (performance indicators)
       </em></p>
    </div>
       </div>
@@ -152,24 +163,25 @@
     <!-- Animation. -->
     <div class="columns is-centered">
       <div class="column is-full-width">
-      <h2 class="title is-3">Main Ideas</h2>
+      <h2 class="title is-3">Method Overview</h2>
           <div class="content has-text-justified">
-            ALARM includes three main phases: Feature Extraction, Call Graph-based Fusion and Multimodal Transfer Learning.
+            <p>ALARM consists of three main phases that work together to enable effective cross-system anomaly detection using multimodal transfer learning:</p>
             <ul>
-               <li><b>Feature Extraction:</b>
-                  Transferable anomaly-relevant information (e.g., log semantics, metric patterns, trace response times/status codes) is extracted from heterogeneous modalities (traces, logs, metrics) and mapped into a unified feature space via modality-specific encoders.
+               <li><b>Feature Extraction Phase:</b>
+                  In this phase, transferable anomaly-relevant information is extracted from heterogeneous modalities (traces, logs, metrics). Specifically, log semantics are captured through text encoders, metric patterns are extracted via time series encoders, and trace information (response times, status codes, invocation paths) is encoded through graph-based encoders. All features are mapped into a unified feature space via modality-specific encoders, enabling cross-modal knowledge transfer.
                </li>
-               <li><b>Call Graph-based Fusion:</b>
-                  A call graph-based strategy models complex inter-modal relationships by organizing multimodal data (generated under the same user call) into graph embeddings that preserve service invocation topologies and operational context. A Graph Autoencoder (GAE) fuses these embeddings into a unified vector, capturing cross-modal dependencies while enabling reversible decoding to retain intra-modal details.
+               <li><b>User Call-based Graph Fusion Phase:</b>
+                  This phase addresses the challenge of modeling complex inter-modal and inter-microservices relationships. A user call-based graph fusion method organizes multimodal data generated under the same user call into unified graph embeddings. This approach preserves service invocation topologies (from traces), operational context (from logs), and performance characteristics (from metrics) in a single graph structure. A Graph Autoencoder (GAE) then fuses these embeddings into a unified vector representation, capturing cross-modal dependencies while enabling reversible decoding to retain intra-modal details. This fusion strategy effectively bridges the modal gap by leveraging the natural relationships established through user call flows.
                </li>
-               <li><b>Multimodal Transfer Learning:</b>
-                  Contrastive learning promotes cross-modal/cross-domain information interaction to balance learning processes, while virtual sample generation enhances modal/domain diversity, mitigating overfitting.</em></p>
+               <li><b>Multimodal Transfer Learning Phase:</b>
+                  This phase tackles the domain gap between source and target systems. Contrastive learning is employed to promote cross-modal and cross-domain information interaction, balancing the learning processes and ensuring that knowledge is effectively transferred across both modalities and domains. Virtual sample generation techniques are integrated to enhance modal and domain diversity, creating augmented training samples that help mitigate overfitting in both modalities and domains. This dual strategy ensures robust generalization to target systems with different characteristics.
                </li>
             </ul>
+            <p>The three phases work synergistically: feature extraction provides transferable representations, graph fusion models complex relationships, and transfer learning ensures effective knowledge transfer to target systems.</p>
               <div align="center">
-            <img src="static/image/overview.png" alt="BUFFET teaser.">
+            <img src="static/image/overview.png" alt="ALARM method overview" style="width: 100%;">
               <p><em>
-                overview of ALARM
+                Overview of the ALARM framework: The three-phase architecture enables effective cross-system anomaly detection through multimodal transfer learning
             </em></p>
               </div>
           </div>
@@ -183,6 +195,66 @@
   <div class="container is-max-desktop">
     <div class="columns is-centered">
       <div class="column is-full-width">
+        <h2 class="title is-3">Technical Challenges and Solutions</h2>
+        <div class="content has-text-justified">
+          <p>
+            Employing multimodal transfer learning techniques to solve the CADM task faces two main obstacles:
+          </p>
+          <ul>
+            <li>
+              <b>Complex Relationships:</b> The intricate dependencies between microservices and the heterogeneous nature of multimodal data (traces, logs, metrics) create complex inter-modal and inter-microservices relationships that are difficult to model effectively. Traditional fusion methods fail to capture these relationships adequately.
+            </li>
+            <li>
+              <b>Data Quality Inconsistency:</b> Multimodal data from different systems exhibit significant variations in quality, distribution, and feature spaces. This inconsistency, combined with the scarcity of labeled data in target systems, leads to overfitting in both modalities and domains, hindering effective knowledge transfer.
+            </li>
+          </ul>
+          <p>
+            <b>ALARM's Solutions:</b> To address these challenges, ALARM employs a user call-based graph fusion method that naturally models relationships through user call flows, and combines contrastive learning with virtual sample generation to enhance diversity and prevent overfitting. This dual strategy effectively bridges both the modal gap (differences between data modalities) and the domain gap (differences between source and target systems).
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Experimental Setup</h2>
+        <div class="content has-text-justified">
+          <p>
+            We evaluate ALARM on two microservice systems to demonstrate its effectiveness in cross-system anomaly detection:
+          </p>
+          <ul>
+            <li>
+              <b>Open-source Benchmark System:</b> We use a widely-adopted open-source microservice benchmark system that provides comprehensive multimodal runtime data including traces, logs, and metrics. This system allows for controlled experiments and reproducible evaluation.
+            </li>
+            <li>
+              <b>Real-world Industrial System:</b> We also evaluate ALARM on a large-scale industrial microservice system from a major technology company. This system handles millions of requests daily and exhibits complex service dependencies and diverse anomaly patterns, providing a realistic testbed for practical deployment scenarios.
+            </li>
+          </ul>
+          <p>
+            <b>Baseline Methods:</b> We compare ALARM against state-of-the-art methods including:
+          </p>
+          <ul>
+            <li>Unsupervised anomaly detection methods that work on single or multiple modalities</li>
+            <li>Cross-system transfer learning approaches that leverage labeled data from other systems</li>
+            <li>Traditional multimodal fusion methods</li>
+          </ul>
+          <p>
+            <b>Evaluation Metrics:</b> We use standard anomaly detection metrics including Precision, Recall, and F1 score to comprehensively evaluate the performance of all methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
         <h2 class="title is-3">Experiment Results</h2>
         <div class="columns is-vcentered interpolation-panel">
         </div>
@@ -190,23 +262,32 @@
         <div class="content has-text-justified">
             <h3 class="title is-4">Main Results</h3>
                 <p>
-                    <span style="color: red"><b>ALARM</b></span> outperforms state-of-the-art methods on an open-source benchmark and a real-world industrial microservice system.
+                    We evaluate ALARM on two microservice systems: an open-source benchmark system and a real-world industrial microservice system. <span style="color: red"><b>ALARM</b></span> significantly outperforms existing state-of-the-art methods, including both unsupervised anomaly detection approaches and cross-system transfer learning methods. The results demonstrate that ALARM achieves superior performance across multiple evaluation metrics (Precision, Recall, and F1 score), with a <b>16.38% improvement in F1 score</b> compared to the best baseline method. This improvement validates the effectiveness of our multimodal transfer learning approach and the user call-based graph fusion strategy.
                 </p>
-                <img src="static/image/overall.jpg" alt="overall">
+                <div align="center">
+                  <img src="static/image/overall.png" alt="overall" style="width: 90%;">
+                  <p><em>Overall performance comparison on benchmark and industrial microservice systems</em></p>
+                </div>
         </div>
         <div class="content has-text-justified">
-            <h3 class="title is-4">Ablations</h3>
+            <h3 class="title is-4">Ablation Studies</h3>
                 <p>
-                    All components play important roles to improve performance off ALARM.
+                    To validate the effectiveness of each component in ALARM, we conduct comprehensive ablation studies. The results demonstrate that all key components—user call-based graph fusion, contrastive learning, and virtual sample generation—play crucial roles in improving the performance of ALARM. Removing any component leads to performance degradation, confirming that the integration of these techniques is essential for effective cross-system anomaly detection. The ablation studies also reveal the complementary nature of these components: graph fusion provides structural modeling, contrastive learning enables knowledge transfer, and virtual sample generation enhances generalization.
                 </p>
-                <img src="static/image/ablations.jpg" alt="ablations">
+                <div align="center">
+                  <img src="static/image/ablations.png" alt="ablations" style="width: 90%;">
+                  <p><em>Ablation study results showing the contribution of each component</em></p>
+                </div>
         </div>
         <div class="content has-text-justified">
             <h3 class="title is-4">Parameter Sensitivity Analysis</h3>
                 <p>
-                    ALARM demonstrates relatively stable performance when the generation rate 𝛼 fluctuates between 0.1 and 0.7.
+                    We analyze the sensitivity of ALARM to key hyperparameters, particularly the virtual sample generation rate 𝛼. The results show that ALARM demonstrates relatively stable performance when the generation rate 𝛼 fluctuates between 0.1 and 0.7, indicating the robustness of our approach. This stability is crucial for practical deployment, as it reduces the need for extensive hyperparameter tuning when applying ALARM to new target systems. The analysis also provides guidance for parameter selection in real-world scenarios.
                 </p>
-            <img src="static/image/parameter_sensitivity.png" alt="results">
+                <div align="center">
+                  <img src="static/image/parameter_sensitivity.png" alt="parameter sensitivity" style="width: 90%;">
+                  <p><em>Parameter sensitivity analysis for virtual sample generation rate</em></p>
+                </div>
         </div>
       </div>
     </div>
@@ -215,16 +296,24 @@
 
 
 
+
 <footer class="footer">
   <div class="container">
     <div class="content has-text-centered">
-      <a class="icon-link"
-         href="">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://anonymous.4open.science/r/ALARM-A779/" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
+      <p>
+        <strong>ALARM</strong> - A Cross-system Anomaly Detection Approach for Microservice Systems Using Multimodal Transfer Learning
+      </p>
+      <p>
+        For questions and inquiries, please refer to the anonymous repository.
+      </p>
+      <div style="margin-top: 1rem;">
+        <a class="icon-link" href="https://anonymous.4open.science/r/ALARM-A779/" style="margin: 0 10px;">
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <p style="margin-top: 1rem; font-size: 0.9em; color: #666;">
+        This work is an anonymous submission. Website template adapted from academic project pages.
+      </p>
     </div>
   </div>
 </footer>
